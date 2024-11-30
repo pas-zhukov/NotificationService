@@ -29,7 +29,7 @@ public class NotificationController {
 
     @GetMapping
     public ResponseEntity<List<NotificationResponseDto>> getCurrentUserNotifications() {
-        String userLogin = authenticationService.getCurrentAuthenticatedUserOrThrow().login();
+        String userLogin = authenticationService.getCurrentAuthenticatedUserOrThrow().getLogin();
         List<Notification> notifications = notificationService.getNotificationsByUserLogin(userLogin);
         return ResponseEntity.ok(notifications.stream().map(notificationConverter::toResponseDto).toList());
     }

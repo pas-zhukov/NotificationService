@@ -29,11 +29,11 @@ public class JwtTokenManager {
     }
 
     public UserRole getUserRoleFromToken(String jwtToken) {
-        return Jwts.parser()
+        return UserRole.valueOf(Jwts.parser()
                 .verifyWith(key)
                 .build()
                 .parseSignedClaims(jwtToken)
                 .getPayload()
-                .get("authority", UserRole.class);
+                .get("authority", String.class));
     }
 }
