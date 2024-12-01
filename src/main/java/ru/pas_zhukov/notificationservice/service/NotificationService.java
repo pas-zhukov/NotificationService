@@ -15,8 +15,6 @@ import ru.pas_zhukov.notificationservice.repository.NotificationsRepository;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.time.temporal.Temporal;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
