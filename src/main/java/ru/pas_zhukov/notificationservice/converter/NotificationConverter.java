@@ -8,10 +8,40 @@ import ru.pas_zhukov.notificationservice.model.Notification;
 @Component
 public class NotificationConverter {
     public NotificationResponseDto toResponseDto(Notification notification) {
-        return null;
+        return new NotificationResponseDto(
+                notification.getChangedByUserId(),
+                notification.getCost(),
+                notification.getDate(),
+                notification.getDuration(),
+                notification.getEventId(),
+                notification.getId(),
+                notification.getRead(),
+                notification.getLocationId(),
+                notification.getMaxPlaces(),
+                notification.getMessageType(),
+                notification.getName(),
+                notification.getOwnerId(),
+                notification.getStatus(),
+                notification.getUserLogin()
+        );
     }
 
     public Notification toDomain(NotificationEntity notificationEntity) {
-        return null;
+        return new Notification(
+                notificationEntity.getChangedByUserId(),
+                notificationEntity.getCost(),
+                notificationEntity.getDate(),
+                notificationEntity.getDuration(),
+                notificationEntity.getEventId(),
+                notificationEntity.getId(),
+                notificationEntity.getRead(),
+                notificationEntity.getLocationId(),
+                notificationEntity.getMaxPlaces(),
+                notificationEntity.getMessageType(),
+                notificationEntity.getName(),
+                notificationEntity.getOwnerId(),
+                notificationEntity.getStatus(),
+                notificationEntity.getUserLogin()
+        );
     }
 }
