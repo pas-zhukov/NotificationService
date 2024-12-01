@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import ru.pas_zhukov.notificationservice.entity.NotificationEntity;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -19,4 +20,8 @@ public interface NotificationsRepository extends JpaRepository<NotificationEntit
     @Modifying
     @Transactional
     void markNotificationsAsRead(@Param("notificationIds") List<Long> notificationIds);
+
+    @Modifying
+    @Transactional
+    void deleteAllByCreatedTimestampBefore(@Param("date") Date date);
 }

@@ -12,7 +12,12 @@ import ru.pas_zhukov.notificationservice.kafka.EventChangeMessage;
 import ru.pas_zhukov.notificationservice.model.Notification;
 import ru.pas_zhukov.notificationservice.repository.NotificationsRepository;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.temporal.Temporal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -57,7 +62,8 @@ public class NotificationService {
                                 message.getName() != null ? jacksonObjectMapper.writeValueAsString(message.getName()) : null,
                                 message.getOwnerId(),
                                 message.getStatus() != null ? jacksonObjectMapper.writeValueAsString(message.getStatus()) : null,
-                                username
+                                username,
+                                Date.from(Instant.now())
                         );
                     } catch (JsonProcessingException e) {
                         logger.warn("Error creating notification", e);
@@ -68,5 +74,10 @@ public class NotificationService {
         List<NotificationEntity> createdNotifications = notificationsRepository.saveAll(notificationsToCreate);
         logger.info("created notifications: {}", createdNotifications);
         return createdNotifications.stream().map(notificationConverter::toDomain).toList();
+    }
+
+    public void deleteOldNotifications() {
+        // TODO: вынести "7" в .properties
+        notificationsRepository.deleteAllByCreatedTimestampBefore(Date.from(LocalDateTime.now().minusDays(7).toInstant(ZoneOffset.UTC)));
     }
 }

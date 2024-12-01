@@ -3,6 +3,8 @@ package ru.pas_zhukov.notificationservice.entity;
 import jakarta.persistence.*;
 import ru.pas_zhukov.notificationservice.kafka.MessageType;
 
+import java.util.Date;
+
 
 @Entity
 @Table(name = "notifications")
@@ -52,10 +54,13 @@ public class NotificationEntity {
     @Column(name = "status_change")
     private String status;
 
+    @Column(name = "created_timestamp")
+    private Date createdTimestamp;
+
     public NotificationEntity() {
     }
 
-    public NotificationEntity(Long changedByUserId, String cost, String date, String duration, Long eventId, Long id, Boolean isRead, String locationId, String maxPlaces, MessageType messageType, String name, Long ownerId, String status, String userLogin) {
+    public NotificationEntity(Long changedByUserId, String cost, String date, String duration, Long eventId, Long id, Boolean isRead, String locationId, String maxPlaces, MessageType messageType, String name, Long ownerId, String status, String userLogin, Date createdTimestamp) {
         this.changedByUserId = changedByUserId;
         this.cost = cost;
         this.date = date;
@@ -70,6 +75,15 @@ public class NotificationEntity {
         this.ownerId = ownerId;
         this.status = status;
         this.userLogin = userLogin;
+        this.createdTimestamp = createdTimestamp;
+    }
+
+    public Date getCreatedTimestamp() {
+        return createdTimestamp;
+    }
+
+    public void setCreatedTimestamp(Date createdTimestamp) {
+        this.createdTimestamp = createdTimestamp;
     }
 
     public Long getChangedByUserId() {
